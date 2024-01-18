@@ -1,0 +1,37 @@
+
+
+
+
+bigMul (x:xs) (y:ys) = bigMul (mulByDigit x (y:ys)) ys
+
+mulByDigit :: Int -> BigInt -> BigInt
+mulByDigit 0 xs = [0]
+mulByDigit n [] = [0]
+mulByDigit n xs = bigAdd xs (mulByDigit (n-1) xs)
+
+
+p 15
+
+pipe :: [(a -> a)] -> a -> a
+pipe [] x = x
+pipe (f:fs) x = f (pipe fs x)
+pipe x = foldl () x
+
+pipe = foldl pipeHelp x
+
+pipe :: [(a -> a)] -> a -> a
+pipe = foldl pipeHelp 0
+        where
+
+pipe :: [(a -> a)] -> a -> a
+pipe x = foldr pipeHelp 0
+        where
+                pipeHelp f acc = f x : acc
+
+
+
+pipe :: [(a -> a)] -> a -> a
+pipe (f:fs) x = foldl pipeHelp 0 fs
+        where
+                pipeHelp x acc = f x acc
+
